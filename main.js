@@ -1,4 +1,5 @@
 // Holding Form Inputs
+let getStarted = document.querySelector("a.start");
 let username = document.querySelector("input[name='username']");
 let email = document.querySelector("input[name='email']");
 let password = document.querySelector("input[name='password']");
@@ -6,13 +7,21 @@ let confirmPass = document.querySelector("input[name='confirm-password']");
 let submit = document.querySelector("button.start");
 
 // Displaying Email By Using SessionStorage
-if (window.location.href === "http://127.0.0.1:5500/logged-in.html") {
+if (window.location.href.endsWith("/logged-in.html")) {
   document.querySelector(".description").innerHTML = JSON.parse(
     sessionStorage.getItem("email")
   );
 }
 
-username.oninput = checkUserName;
+// Passing Finctions To Input & Submit Elements
+if (window.location.href.endsWith("/register.html")) {
+  username.oninput = checkUserName;
+  email.oninput = checkEmail;
+  password.oninput = checkPassword;
+  confirmPass.oninput = checkConfirmPass;
+  submit.onclick = postDataToAPI;
+}
+
 // Function To Check Username
 function checkUserName() {
   let checker = document.querySelector(".check-username");
@@ -47,7 +56,6 @@ function checkUserName() {
   }
 }
 
-email.oninput = checkEmail;
 // Function To Check Email
 function checkEmail() {
   let checker = document.querySelector(".check-email");
@@ -72,7 +80,6 @@ function checkEmail() {
   }
 }
 
-password.oninput = checkPassword;
 // Function To Check Password
 function checkPassword() {
   let checker = document.querySelector(".check-password");
@@ -97,7 +104,6 @@ function checkPassword() {
   }
 }
 
-confirmPass.oninput = checkConfirmPass;
 // Function To Check Password Confirmation
 function checkConfirmPass() {
   let checker = document.querySelector(".check-confirm-password");
@@ -120,7 +126,7 @@ function checkConfirmPass() {
   }
 }
 
-// Function To Submit Data To The API
+// Function To Submit Valid Data To The API
 async function postDataToAPI(e) {
   e.preventDefault();
 
@@ -153,6 +159,3 @@ async function postDataToAPI(e) {
       .catch((e) => console.log(e));
   } else console.error("Please, correct the displayed errors");
 }
-
-// Submitting The Form
-submit.onclick = postDataToAPI;
