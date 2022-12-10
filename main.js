@@ -148,7 +148,7 @@ async function postDataToAPI(e) {
       .then((res) => {
         status = res.status;
         if (status === 200) {
-          window.location.href = "http://127.0.0.1:5500/logged-in.html";
+          window.location.href = "./logged-in.html";
         }
       })
       .catch((e) => console.log(e));
