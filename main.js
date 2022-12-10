@@ -5,8 +5,7 @@ let password = document.querySelector("input[name='password']");
 let confirmPass = document.querySelector("input[name='confirm-password']");
 let submit = document.querySelector("button.start");
 
-console.log(username, email, password, confirmPass, submit);
-
+// Displaying Email By Using SessionStorage
 if (window.location.href === "http://127.0.0.1:5500/logged-in.html") {
   document.querySelector(".description").innerHTML = JSON.parse(
     sessionStorage.getItem("email")
